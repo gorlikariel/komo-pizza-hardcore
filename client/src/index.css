@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  background-image: url(https://png.pngtree.com/background/20210710/original/pngtree-delicious-pizza-background-material-picture-image_1050243.jpg);
+  background-size: cover;
+  font-family: 'Algerian';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Algerian';
+  src: URL('./fonts/Algerian.ttf') format('truetype');
+}
