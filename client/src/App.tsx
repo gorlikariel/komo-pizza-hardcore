@@ -6,7 +6,7 @@ import Layout from './components/Layout';
 import HomeView from './views/HomeView';
 import routes from './routes';
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path={routes.HOME} element={<Layout />}>
@@ -18,9 +18,9 @@ function App() {
       </Route>
     </Routes>
   );
-}
+};
 
-function NoMatch() {
+const NoMatch = () => {
   return (
     <div>
       <h2>Nothing to see here!</h2>
@@ -29,6 +29,6 @@ function NoMatch() {
       </p>
     </div>
   );
-}
+};
 
 export default App;

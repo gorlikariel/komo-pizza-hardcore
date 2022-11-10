@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 interface StyledIconProps {
@@ -8,13 +7,13 @@ interface StyledIconProps {
   src: string;
 }
 
-function Icon(props: StyledIconProps) {
+const StyledIcon = styled.img<StyledIconProps>`
+  width: ${(props) => (props.width ? props.width : '4em')};
+  padding: 0.5em;
+`;
+
+const Icon = (props: StyledIconProps) => {
   return <StyledIcon {...props} />;
-}
+};
 
 export default Icon;
-
-const StyledIcon = styled.img<StyledIconProps>`
-  width: ${(props) => (props.width ? props.width : '70px')};
-  padding: 2px;
-`;

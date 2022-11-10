@@ -7,17 +7,10 @@ interface LabelProps {
   title?: string;
 }
 
-function Label(props: LabelProps) {
-  console.log(props.title);
-  return <StyledLabel {...props}>{props.text}</StyledLabel>;
-}
-
-export default Label;
-
 const StyledLabel = styled.span<LabelProps>`
   font-size: ${(props) => `${props.fontSize ? props.fontSize : '1.22em'};`}  
   font-weight: 500;
-  padding-bottom: 10px;
+  padding-bottom: 1.5em;
   animation: zoomup 2s linear infinite;
   animation-delay: calc(200ms * var(--i));
   @keyframes zoomup {
@@ -41,3 +34,10 @@ const StyledLabel = styled.span<LabelProps>`
     font-size: 0.8em;
   }
 `;
+
+const Label = (props: LabelProps) => {
+  console.log(props.title);
+  return <StyledLabel {...props}>{props.text}</StyledLabel>;
+};
+
+export default Label;

@@ -21,36 +21,6 @@ interface StyledIconProps {
   noGlow?: boolean;
 }
 
-export default function Pizza(props: PizzaProps) {
-  const { name, price, image, toppings, crust } = props;
-
-  return (
-    <Container>
-      <ToppingsList>
-        <Label text='On Top: ' color='black' />
-        <List>
-          {toppings.map(({ topping: { name, image: toppingImage } }) => {
-            return (
-              <li data-tip={name} key={`${toppingImage}${name}`}>
-                <Icon noGlow width='50px' alt={name} src={toppingImage} />
-              </li>
-            );
-          })}
-        </List>
-        <Label text={`${crust} Crust!`} color='black' />
-      </ToppingsList>
-      <StarBurstDropShadow>
-        <StarBurst>
-          <Label text={name} />
-          <Icon width='35%' alt={name} src={image} />
-          <PriceDisplay>Price: {`${price / 100}$`}</PriceDisplay>
-        </StarBurst>
-      </StarBurstDropShadow>
-      <ReactTooltip />
-    </Container>
-  );
-}
-
 const StarBurst = styled.div`
   aspect-ratio: 1;
   clip-path: polygon(
@@ -78,7 +48,7 @@ const StarBurst = styled.div`
   background-color: #8b4513;
   display: flex;
   flex-direction: column;
-  width: 700px;
+  width: 33em;
   justify-content: center;
   color: #ffff;
   align-items: center;
@@ -90,13 +60,12 @@ const StarBurst = styled.div`
       rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
   }
   @media (max-width: 700px) {
-    width: 250px;
+    width: 19em;
   }
 `;
 
 const Icon = styled.img<StyledIconProps>`
-  width: ${(props) => (props.width ? props.width : '70px')};
-
+  width: ${(props) => (props.width ? props.width : '5em')};
   box-shadow: ${(props) =>
     props.noGlow ? '' : '0px 29px 30px 30px rgba(255, 149, 5, 0.7)'};
 
@@ -111,8 +80,8 @@ const StarBurstDropShadow = styled.div`
 const Container = styled.div`
   display: flex;
   background-color: white;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 3em;
+  padding-right: 3em;
   border-radius: 40%;
   color: black;
   @media (max-width: 700px) {
@@ -124,7 +93,7 @@ const PriceDisplay = styled.span`
   font-style: italic;
   color: #ffff;
   font-size: 1em;
-  padding-top: 7px;
+  padding-top: 0.8em;
   font-weight: 100;
   letter-spacing: 0.1em;
   @media (max-width: 700px) {
@@ -149,3 +118,35 @@ const ToppingsList = styled.div`
 const List = styled.ul`
   list-style-image: url('https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/CSS/list-style-image/starsolid.gif');
 `;
+
+const Pizza = (props: PizzaProps) => {
+  const { name, price, image, toppings, crust } = props;
+
+  return (
+    <Container>
+      <ToppingsList>
+        <Label text='On Top: ' color='black' />
+        <List>
+          {toppings.map(({ topping: { name, image: toppingImage } }) => {
+            return (
+              <li data-tip={name} key={`${toppingImage}${name}`}>
+                <Icon noGlow width='3em' alt={name} src={toppingImage} />
+              </li>
+            );
+          })}
+        </List>
+        <Label text={`${crust} Crust!`} color='black' />
+      </ToppingsList>
+      <StarBurstDropShadow>
+        <StarBurst>
+          <Label text={name} />
+          <Icon width='35%' alt={name} src={image} />
+          <PriceDisplay>Price: {`${price / 100}$`}</PriceDisplay>
+        </StarBurst>
+      </StarBurstDropShadow>
+      <ReactTooltip />
+    </Container>
+  );
+};
+
+export default Pizza;

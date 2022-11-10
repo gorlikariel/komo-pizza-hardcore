@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'urql';
 import EditableTopping from '../components/EditableTopping';
@@ -14,7 +13,17 @@ interface ToppingsData {
   toppings: ToppingData[];
 }
 
-export default function ToppingsView() {
+const ToppingsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5vmax;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-gap: 2vmax;
+  }
+`;
+
+const ToppingsView = () => {
   const [{ fetching, data }] = useQuery<ToppingsData>({ query: ToppingsQuery });
 
   return fetching ? null : (
@@ -32,14 +41,6 @@ export default function ToppingsView() {
       })}
     </ToppingsContainer>
   );
-}
+};
 
-const ToppingsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 40px;
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
-  }
-`;
+export default ToppingsView;

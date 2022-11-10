@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { ToppingData } from '../views/ToppingsView';
 import Icon from './Icon';
@@ -13,50 +13,6 @@ interface SelectToppingProps {
 interface StarProps {
   width?: string;
 }
-
-function SelectTopping(props: SelectToppingProps) {
-  const [count, setCount] = useState(0);
-  const { addTopping, removeTopping, topping } = props;
-  const { id, image, name, price } = topping;
-  const add = () => {
-    setCount(count + 1);
-    addTopping(topping);
-  };
-
-  const remove = () => {
-    if (!count) {
-      return;
-    }
-    setCount(count - 1);
-    removeTopping(topping);
-  };
-  return (
-    <StarDropShadow>
-      <Star width='500px'>
-        <Label title='counter' text={`${count}`} />
-        <Label text={name} />
-        <ToppingSelector>
-          <Icon
-            width='25px'
-            onClick={remove}
-            src='https://cdn-icons-png.flaticon.com/512/929/929430.png'
-            alt='minus'
-          />
-          <Icon width='55px' alt={name} src={image} />
-          <Icon
-            onClick={add}
-            width='25px'
-            src='https://cdn-icons-png.flaticon.com/512/148/148764.png'
-            alt='plus'
-          />
-        </ToppingSelector>
-        <Label text={`Price: ${price / 100}$`} />
-      </Star>
-    </StarDropShadow>
-  );
-}
-
-export default SelectTopping;
 
 const StarDropShadow = styled.div`
   filter: drop-shadow(-1px 26px 3px rgba(123, 92, 0, 0.6));
@@ -82,7 +38,7 @@ const Star = styled.div<StarProps>`
   background-color: green;
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.width ? props.width : '700px')}}
+  width: ${(props) => (props.width ? props.width : '35em')}}
   justify-content: center;
   align-items: center;
   transition: transform 0.2s, box-shadow 0.3s;
@@ -93,14 +49,57 @@ const Star = styled.div<StarProps>`
       rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
   }
   @media (max-width: 600px) {
-    width: 300px;
+    width: 25em;
   }
 `;
 
 const ToppingSelector = styled.div`
   display: flex;
   cursor: pointer;
-  gap: 10px;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 0.4em;
 `;
+
+const SelectTopping = (props: SelectToppingProps) => {
+  const [count, setCount] = useState(0);
+  const { addTopping, removeTopping, topping } = props;
+  const { image, name, price } = topping;
+  const add = () => {
+    setCount(count + 1);
+    addTopping(topping);
+  };
+
+  const remove = () => {
+    if (!count) {
+      return;
+    }
+    setCount(count - 1);
+    removeTopping(topping);
+  };
+  return (
+    <StarDropShadow>
+      <Star width='32em'>
+        <Label title='counter' text={`${count}`} />
+        <Label text={name} />
+        <ToppingSelector>
+          <Icon
+            width='1.8em'
+            onClick={remove}
+            src='https://cdn-icons-png.flaticon.com/512/929/929430.png'
+            alt='minus'
+          />
+          <Icon width='3em' alt={name} src={image} />
+          <Icon
+            onClick={add}
+            width='1.8em'
+            src='https://cdn-icons-png.flaticon.com/512/148/148764.png'
+            alt='plus'
+          />
+        </ToppingSelector>
+        <Label text={`Price: ${price / 100}$`} />
+      </Star>
+    </StarDropShadow>
+  );
+};
+
+export default SelectTopping;

@@ -16,7 +16,18 @@ interface PizzasData {
   pizzas: PizzaData[];
 }
 
-export default function PizzasView() {
+const PizzasContainer = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(1fr);
+  grid-gap: 5vmax;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-gap: 2vmax;
+  }
+`;
+
+const PizzasView = () => {
   const [{ fetching, data }] = useQuery<PizzasData>({ query: PizzasQuery });
 
   return fetching ? null : (
@@ -36,15 +47,6 @@ export default function PizzasView() {
       })}
     </PizzasContainer>
   );
-}
+};
 
-const PizzasContainer = styled.div`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(1fr);
-  grid-gap: 40px;
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
-  }
-`;
+export default PizzasView;
