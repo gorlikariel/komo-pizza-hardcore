@@ -1,10 +1,11 @@
 import ToppingsView from './views/ToppingsView';
 import PizzasView from './views/PizzasView';
 import BuildView from './views/BuildView';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomeView from './views/HomeView';
 import routes from './routes';
+import NoMatch from './views/NoMatch';
 
 const App = () => {
   return (
@@ -17,17 +18,6 @@ const App = () => {
         <Route path={routes.NO_MATCH} element={<NoMatch />} />
       </Route>
     </Routes>
-  );
-};
-
-const NoMatch = () => {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to='/'>Go to the home page</Link>
-      </p>
-    </div>
   );
 };
 

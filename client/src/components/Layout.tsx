@@ -11,12 +11,12 @@ const Container = styled.div`
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <NavBar />
       <Container>
         <Outlet />
       </Container>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { ToppingData } from '../views/ToppingsView';
 import Label from './Label';
@@ -65,10 +65,12 @@ const StarBurst = styled.div`
 `;
 
 const Icon = styled.img<StyledIconProps>`
-  width: ${(props) => (props.width ? props.width : '5em')};
-  box-shadow: ${(props) =>
-    props.noGlow ? '' : '0px 29px 30px 30px rgba(255, 149, 5, 0.7)'};
-
+  width: ${({ width }) => width || '5em'};
+  ${({ noGlow }) =>
+    noGlow &&
+    css`
+      box-shadow: 0px 29px 30px 30px rgba(255, 149, 5, 0.7);
+    `}
   border-radius: 70%;
   padding: 2px;
 `;
@@ -119,9 +121,7 @@ const List = styled.ul`
   list-style-image: url('https://yari-demos.prod.mdn.mozit.cloud/en-US/docs/Web/CSS/list-style-image/starsolid.gif');
 `;
 
-const Pizza = (props: PizzaProps) => {
-  const { name, price, image, toppings, crust } = props;
-
+const Pizza = ({ name, price, image, toppings, crust }: PizzaProps) => {
   return (
     <Container>
       <ToppingsList>

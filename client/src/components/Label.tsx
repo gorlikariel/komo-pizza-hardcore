@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { InterpolationFunction, keyframes } from 'styled-components';
 
 interface LabelProps {
   color?: string;
@@ -7,13 +7,10 @@ interface LabelProps {
   title?: string;
 }
 
-const StyledLabel = styled.span<LabelProps>`
-  font-size: ${(props) => `${props.fontSize ? props.fontSize : '1.22em'};`}  
-  font-weight: 500;
-  padding-bottom: 1.5em;
-  animation: zoomup 2s linear infinite;
-  animation-delay: calc(200ms * var(--i));
-  @keyframes zoomup {
+const zoomUpAnimation: InterpolationFunction<LabelProps> = ({
+  color,
+}) => keyframes`
+  {
     0%,
     100% {
       color: green;
@@ -25,18 +22,24 @@ const StyledLabel = styled.span<LabelProps>`
     5%,
     95% {
       filter: blur(0);
-      color: ${(props) => (props.color ? props.color : 'inherit')};
+      color: ${color || 'inherit'};
       text-shadow: none;
     }
   }
+`;
 
+const StyledLabel = styled.span<LabelProps>`
+  font-size: ${(props) => `${props.fontSize ? props.fontSize : '1.22em'};`}  
+  font-weight: 500;
+  padding-bottom: 1.5em;
+  animation: ${(props) => zoomUpAnimation(props)} 2s linear infinite;
+  animation-delay: calc(200ms * var(--i));  
   @media (max-width: 700px) {
     font-size: 0.8em;
   }
 `;
 
 const Label = (props: LabelProps) => {
-  console.log(props.title);
   return <StyledLabel {...props}>{props.text}</StyledLabel>;
 };
 

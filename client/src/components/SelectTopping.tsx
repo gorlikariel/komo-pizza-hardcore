@@ -5,8 +5,8 @@ import Icon from './Icon';
 import Label from './Label';
 
 interface SelectToppingProps {
-  addTopping: Function;
-  removeTopping: Function;
+  addTopping: (topping: ToppingData) => void;
+  removeTopping: (topping: ToppingData) => void;
   topping: ToppingData;
 }
 
@@ -38,7 +38,7 @@ const Star = styled.div<StarProps>`
   background-color: green;
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.width ? props.width : '35em')}}
+  width: ${({ width }) => width || '35em'}}
   justify-content: center;
   align-items: center;
   transition: transform 0.2s, box-shadow 0.3s;
@@ -60,9 +60,12 @@ const ToppingSelector = styled.div`
   padding-bottom: 0.4em;
 `;
 
-const SelectTopping = (props: SelectToppingProps) => {
+const SelectTopping = ({
+  addTopping,
+  removeTopping,
+  topping,
+}: SelectToppingProps) => {
   const [count, setCount] = useState(0);
-  const { addTopping, removeTopping, topping } = props;
   const { image, name, price } = topping;
   const add = () => {
     setCount(count + 1);

@@ -45,18 +45,16 @@ const OrderButton = styled.a`
 `;
 
 const BuildView = () => {
-  const [{ fetching, data }] = useQuery<ToppingsData>({ query: ToppingsQuery });
+  const [{ data }] = useQuery<ToppingsData>({ query: ToppingsQuery });
   const [totalPrice, setTotalPrice] = useState(0);
   // const [selectedToppings, setSelectedToppings] = useState([]);
   const addTopping = (topping: ToppingData) => {
-    const { price, id } = topping;
-    console.log(id);
+    const { price } = topping;
     setTotalPrice(totalPrice + price);
   };
 
   const removeTopping = (topping: ToppingData) => {
-    const { price, id } = topping;
-    console.log(id);
+    const { price } = topping;
     setTotalPrice(totalPrice - price);
   };
 

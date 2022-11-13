@@ -3,7 +3,7 @@ import { useMutation } from 'urql';
 import styled from 'styled-components';
 import { ToppingPriceMutation } from '../data/query';
 import Icon from './Icon';
-interface IEditableToppingProps {
+interface EditableToppingProps {
   id: number;
   name: string;
   price: number;
@@ -83,9 +83,13 @@ const EditLabel = styled.span`
   font-style: italic;
 `;
 
-const EditableTopping = (props: IEditableToppingProps) => {
-  const [mutationState, executeMutation] = useMutation(ToppingPriceMutation);
-  const { id, name, price: initialPrice, image } = props;
+const EditableTopping = ({
+  id,
+  name,
+  price: initialPrice,
+  image,
+}: EditableToppingProps) => {
+  const [, updatePrice] = useMutation(ToppingPriceMutation);
   const [editMode, setEditMode] = useState(false);
   const [edited, setEdited] = useState(false);
   const [currentValue, setCurrentValue] = useState<number | string>(
@@ -95,7 +99,7 @@ const EditableTopping = (props: IEditableToppingProps) => {
   const savePrice: React.MouseEventHandler<HTMLButtonElement> = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    executeMutation({
+    updatePrice({
       id,
       newPrice: Number(currentValue) * 100,
     });
@@ -127,14 +131,14 @@ const EditableTopping = (props: IEditableToppingProps) => {
           >
             <EditLabel>Edit</EditLabel>
             <Icon width='1.5em' alt={'edit icon'} src={icons.edit} />
-            {edited ? (
+            {edited && (
               <Icon
                 width='1.5em'
                 alt={'save icon'}
                 src={icons.save}
                 onClick={savePrice}
               />
-            ) : null}
+            )}
           </Edit>
         </EditablePrice>
       </Preview>
