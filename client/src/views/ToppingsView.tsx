@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useQuery } from 'urql';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import EditableTopping from '../components/EditableTopping';
 import { ToppingsQuery } from '../data/query';
 
@@ -26,17 +28,29 @@ const ToppingsContainer = styled.div`
 const ToppingsView = () => {
   const [{ fetching, data }] = useQuery<ToppingsData>({ query: ToppingsQuery });
 
-  return fetching ? null : (
+  return fetching ? (
+    <ToppingsContainer>
+      {[...new Array(12)].map(() => {
+        return (
+          <>
+            <Skeleton height='10em' width='17em' count={1} />
+          </>
+        );
+      })}
+    </ToppingsContainer>
+  ) : (
     <ToppingsContainer>
       {data?.toppings.map(({ id, name, price, image }) => {
         return (
-          <EditableTopping
-            image={image}
-            key={`${name}${id}`}
-            id={id}
-            name={name}
-            price={price}
-          />
+          <>
+            <EditableTopping
+              image={image}
+              key={`${name}${id}`}
+              id={id}
+              name={name}
+              price={price}
+            />
+          </>
         );
       })}
     </ToppingsContainer>
