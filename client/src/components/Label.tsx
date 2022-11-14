@@ -29,7 +29,7 @@ const zoomUpAnimation: InterpolationFunction<LabelProps> = ({
 `;
 
 const StyledLabel = styled.span<LabelProps>`
-  font-size: ${(props) => `${props.fontSize ? props.fontSize : '1.22em'};`}  
+  font-size: ${({ fontSize }) => `${fontSize || '1.22em'};`}  
   font-weight: 500;
   padding-bottom: 1.5em;
   animation: ${(props) => zoomUpAnimation(props)} 2s linear infinite;
