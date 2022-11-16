@@ -6,7 +6,6 @@ An exercise for learning docker-compose, Hasura, React + TS, urql, styled-compon
 
 ## How to **run**
 
-- cd ./graphql
 - run `docker-compose up -d`
 - You should see the Hasura console running and already connected to postgres. <http://localhost:8080/console>
 
