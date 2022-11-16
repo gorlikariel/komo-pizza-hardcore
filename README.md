@@ -1,5 +1,7 @@
 # komo-pizza
 
+![pizza](https://i.ibb.co/WyrX4yV/ugly-pizza-modified.png)
+
 An exercise for learning docker-compose, Hasura, React + TS, urql, styled-components and jest.
 
 ## How to **run**
