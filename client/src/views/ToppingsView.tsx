@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { useQuery } from 'urql';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import EditableTopping from '../components/EditableTopping';
-import { ToppingsQuery } from '../data/query';
+import styled from "styled-components";
+import { useQuery } from "urql";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import EditableTopping from "../components/EditableTopping";
+import { ToppingsQuery } from "../data/query";
 
 export interface ToppingData {
   id: number;
@@ -30,10 +30,10 @@ const ToppingsView = () => {
 
   return fetching ? (
     <ToppingsContainer>
-      {[...new Array(12)].map(() => {
+      {[...new Array(9)].map(() => {
         return (
           <>
-            <Skeleton height='10em' width='17em' count={1} />
+            <Skeleton height="10em" width="17em" count={1} />
           </>
         );
       })}
