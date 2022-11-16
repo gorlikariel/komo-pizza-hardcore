@@ -28,8 +28,8 @@ export const PizzasQuery = `{
   }`;
 
 export const ToppingPriceMutation = `
-mutation updateToppingPrice($id:Int!, $newPrice:numeric!) {
-  update_toppings(where:{ id: {_eq: $id}}, _set:{price: $newPrice}){
+mutation updateToppingPrice($id:Int!, $newPrice:Int!) {
+  update_toppings(where: { id: {_eq: $id}}, _set:{price: $newPrice}){
     affected_rows
   }
 }
